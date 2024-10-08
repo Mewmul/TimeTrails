@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style/main.css">
+    <link rel="icon" href=".//public/favicon.ico type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <title>Hartenbos Drawers: Tydtoets</title>
+</head>
+<body>
+    <img src="./public/Logo.png" alt="BosBok" id="bok">
+    <div class="topHeader">
+        <div id="stopwatch">00:00:00</div>
+        <div class="myButtons" id="buttons">
+            <button class="topButton" id="startBtn">Start</button>
+            <button class="topButton" id="stopBtn">Stop</button>
+            <button class="topButton" id="resetBtn">Reset</button>
+            <button class="topButton" id="download">Download</button>
+        </div>
+    </div>   
+    <div id="firstBorder"></div>
+    <div class="capture">
+        <div class="distance">
+            <h3>3 km</h3>
+            <button id="captureBtn3km">
+                <img class="watch" src="./public/stopwatch-svgrepo-com.svg" alt="stopwatch">
+            </button>
+            <div id="capturedTimes3km"></div>
+        </div>
+        <div id="secondBorder"></div>
+        <div class="distance">
+            <h3>6 km</h3>
+            <button id="captureBtn6km">
+                <img class="watch" src="./public/stopwatch-svgrepo-com.svg" alt="stopwatch">
+            </button>
+            <div id="capturedTimes6km"></div>
+        </div>
+    </div>
+    <div id="thirdBorder"></div>
+    <script src="./scripts/script.js"></script>
+    <script src="./scripts/xlsx.full.min.js"></script>
+</body>
+</html>
