@@ -101,6 +101,7 @@ function displayCapturedTimes3km() {
         timeText.style.marginRight = '10px'; // Space between time and input
 
         const inputField = document.createElement('input');
+        inputField.className = "nameInput";
         inputField.type = 'text';
         inputField.placeholder = 'Enter Name';
         inputField.value = item.runnerName; // Fill input with existing runnerNamee
@@ -135,6 +136,7 @@ function displayCapturedTimes6km() {
         timeText.style.marginRight = '10px'; // Space between time and input
 
         const inputField = document.createElement('input');
+        inputField.className = "nameInput";
         inputField.type = 'text';
         inputField.placeholder = 'Enter Name';
         inputField.value = item.runnerName; // Fill input with existing runnerNamee
