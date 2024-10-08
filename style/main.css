@@ -100,3 +100,19 @@ h3 {
     padding: 10px; /* Padding for better spacing */
     border: 1px solid #ccc; /* Optional border */
 }
+
+@media (max-width: 480px) {
+    #bok {
+        width: 70px;
+        margin-top: 15px;
+
+    }
+
+    .input {
+        width: 140px;
+    }
+
+    .nameInput{
+        width:50px;
+    }
+}
