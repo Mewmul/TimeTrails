@@ -1,37 +1,78 @@
-let startTime;
 let updatedTime;
 let difference;
 let running = false;
-let downloadFlag = false;
+let downloadFlag = false
 let interval;
 let capturedTimes3km = [];
 let capturedTimes6km = [];
-let place3km;
-let place6km;
+let place3km = 0;
+let place6km = 0;
+let startTime;
+
 const customHeader = ["Posisie", "Tyd", "Naam"];
 
+window.addEventListener("beforeunload", () => {
+    
+    localStorage.setItem("data3km", JSON.stringify(capturedTimes3km));
+    localStorage.setItem("data6km", JSON.stringify(capturedTimes6km));
+    localStorage.setItem("holdPlace3km", place3km);
+    localStorage.setItem("holdPlace6km", place6km);
+
+});
+window.addEventListener("load", () => {
+    const savedStartTime = localStorage.getItem("stopwatchStartTime");
+    const savedData3km = localStorage.getItem("data3km");
+    const savedData6km = localStorage.getItem("data6km");
+    const savedPlace3km = localStorage.getItem("holdPlace3km");
+    const savedPlace6km = localStorage.getItem("holdPlace6km");
+    
+
+    if (savedData3km || savedData6km) {
+        if(savedStartTime)
+        {
+            startTime = parseInt(savedStartTime);
+            startStopwatch();
+        }
+        capturedTimes3km = JSON.parse(savedData3km);
+        capturedTimes6km = JSON.parse(savedData6km);
+
+        place3km = savedPlace3km;
+        place6km = savedPlace6km;
+
+        displayCapturedTimes3km();
+        displayCapturedTimes6km();
+    }
+});
 
 // Get elements from the DOM
 const stopwatchDisplay = document.getElementById('stopwatch');
 const capturedTimesDisplay3km = document.getElementById('capturedTimes3km');
 const capturedTimesDisplay6km = document.getElementById("capturedTimes6km");
 
+
 function startStopwatch() {
     if (!running) {
+        if(!startTime)
+        {
+            startTime = new Date().getTime() - (difference || 0);
+            localStorage.setItem("stopwatchStartTime", startTime);
+            console.log("first");
+        }
         downloadFlag = false
-        place3km = 0;
-        place6km = 0;
-        startTime = new Date().getTime() - (difference || 0);
         interval = setInterval(updateStopwatch, 100);
         running = true;
     }
 }
 
+
 function stopStopwatch() {
     if (running) {
         clearInterval(interval);
         running = false;
+        pauseTime = true;
         downloadFlag = true;
+        difference = new Date().getTime() - startTime;
+        localStorage.removeItem("stopwatchStartTime");
     }
 }
 
@@ -41,6 +82,10 @@ function resetStopwatch() {
     
     if (confirmReset) {
         clearInterval(interval);
+        localStorage.clear();
+        startTime = null;
+        place3km = 0;
+        place6km = 0;
         running = false;
         difference = 0;
         stopwatchDisplay.innerHTML = "00:00:00";
@@ -52,9 +97,9 @@ function resetStopwatch() {
 }
 
 function updateStopwatch() {
+   
     updatedTime = new Date().getTime();
     difference = updatedTime - startTime;
-
     const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
@@ -101,7 +146,7 @@ function displayCapturedTimes3km() {
         timeText.style.marginRight = '10px'; // Space between time and input
 
         const inputField = document.createElement('input');
-        inputField.className = "nameInput";
+        inputField.className = "nameInput"
         inputField.type = 'text';
         inputField.placeholder = 'Enter Name';
         inputField.value = item.runnerName; // Fill input with existing runnerNamee
